@@ -3,7 +3,6 @@ package application;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -30,14 +29,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//Stage secondaryStage = new Stage();
+			AnchorPane root = new AnchorPane();
 			Image image = new Image(new FileInputStream("C:\\Users\\Prince\\Downloads\\Snake.png"));
 			ImageView imageView = new ImageView(image);
-			//imageView.setX(25); 
-		    //imageView.setY(25); 
-		    //imageView.setFitHeight(800); 
-		    //imageView.setFitWidth(900);
-		    //imageView.setPreserveRatio(true);
-		    Button start = new Button("START");
+			Button start = new Button("START");
 		    Button score = new Button("LEADERBOARD");
 			Button exit = new Button("EXIT");
 		    start.setLayoutX(120);
@@ -49,12 +44,15 @@ public class Main extends Application {
 		    start.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font: 24 arial; -fx-font-weight: bold");
 		    score.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #ff0000; -fx-font: 14 arial; -fx-font-weight: bold");
 		    exit.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #ff0000; -fx-font: 14 arial; -fx-font-weight: bold");
-		    AnchorPane root = new AnchorPane(imageView, start, score, exit);
-			//root.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-			//root.getChildren().addAll(imageView);
-			//root.getChildren().addAll(imageView, start, score, exit);
-			//root.setAlignment(Pos.CENTER);
-			exit.setOnAction(e -> System.exit(0));
+		    root.getChildren().addAll(imageView, start, score, exit);
+			
+		    start.setOnMouseEntered(event -> {
+				//System.out.println("LALA");
+				start.setStyle("-fx-background-color: #000000; -fx-text-fill: #00ffff; -fx-font: 24 arial; -fx-font-weight: bold");
+			});
+			start.setOnMouseExited(event -> {
+				start.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font: 24 arial; -fx-font-weight: bold");
+			});
 			start.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -63,6 +61,12 @@ public class Main extends Application {
 					game.start(primaryStage);
 					
 				}
+			});
+			score.setOnMouseEntered(event -> {
+				score.setStyle("-fx-background-color: #000000; -fx-text-fill: #00ffff; -fx-font: 14 arial; -fx-font-weight: bold");
+			});
+			score.setOnMouseExited(event -> {
+				score.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #ff0000; -fx-font: 14 arial; -fx-font-weight: bold");
 			});
 			score.setOnAction(new EventHandler<ActionEvent>() {
 				
@@ -73,6 +77,14 @@ public class Main extends Application {
 					le.start(primaryStage);
 				}
 			});
+			exit.setOnMouseEntered(event -> {
+				exit.setStyle("-fx-background-color: #000000; -fx-text-fill: #00ffff; -fx-font: 14 arial; -fx-font-weight: bold");
+			});
+			exit.setOnMouseExited(event -> {
+				exit.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #ff0000; -fx-font: 14 arial; -fx-font-weight: bold");
+			});
+			exit.setOnAction(e -> System.exit(0));
+			
 			Scene scene = new Scene(root,340,500);
 			scene.setFill(Color.BLACK);
 			scene.getStylesheets().addAll(this.getClass().getResource("application.css").toExternalForm());
@@ -85,7 +97,7 @@ public class Main extends Application {
 		}
 	}
 	
-	public void start1(Stage primaryStage) {
+	/*public void start1(Stage primaryStage) {
 		try {
 			Button back = new Button("BACK");
 			Text text = new Text("S.No.");
@@ -115,7 +127,7 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} */
 	
 	public static void main(String[] args) {
 		launch(args);
